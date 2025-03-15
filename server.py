@@ -51,3 +51,23 @@ if __name__ == '__main__':
     import os
     port = int(os.environ.get("PORT", 8080))  # Railway가 8080을 기본으로 요청할 수도 있음
     app.run(host="0.0.0.0", port=port, debug=True)
+
+
+import os
+
+# 환경 변수 가져오기
+secret_key = os.getenv("SECRET_KEY")
+
+# 환경 변수가 제대로 가져와지는지 출력
+print(f"SECRET_KEY: {secret_key}")
+
+# Flask 앱 예제 (배포용)
+from flask import Flask
+app = Flask(__name__)
+
+@app.route("/")
+def home():
+    return f"Hello, Railway! Your SECRET_KEY is {secret_key}"
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
